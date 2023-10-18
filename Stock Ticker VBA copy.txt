@@ -1,0 +1,70 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+END
+Attribute VB_Name = "Sheet1"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+Sub stocks_for_one_year()
+
+Dim Ticker As String
+Dim OpeningPrice As Double
+Dim ClosingPrice As Double
+Dim YearlyChange As Double
+Dim PercentChange As Double
+Dim LastRow As Double
+
+
+
+
+
+
+Worksheets(1).Range("J1").Value = "Ticker"
+Worksheets(1).Range("K1").Value = "Yearly Change"
+Worksheets(1).Range("L1").Value = "Percent Change"
+Worksheets(1).Range("M1").Value = "Total Stock Volume"
+j = 2
+LastRow = Worksheets(1).Cells(Rows.Count, 1).End(xlUp).Row
+For i = 2 To LastRow
+If Worksheets(1).Cells(i + 1, 1).Value = Worksheets(1).Cells(i, 1).Value Then
+Ticker = Worksheets(1).Cells(i, 1).Value
+OpeningPrice = Worksheets(1).Cells(i, 3).Value
+ClosingPrice = Worksheets(1).Cells(i, 6).Value
+YearlyChange = OpeningPrice - ClosingPrice
+
+End If
+
+ If OpeningPrice <> 0 Then
+ PercentChange = (YearlyChange / OpeningPrice) * 100
+ 
+ Else
+ PercentChange = 0
+End If
+Worksheets(1).Cells(j, 10).Value = Ticker
+Worksheets(1).Cells(j, 11).Value = YearlyChange
+Worksheets(1).Cells(j, 12).Value = PercentChange
+If Worksheets(1).Cells(i + 1, 1).Value <> Worksheets(1).Cells(i, 1).Value Then
+
+End If
+j = j + 1
+
+Application.WorksheetFunction.Sum (Worksheets(1).Range(Worksheets(1).Cells(i - TotalVolume + 1, 7), Worksheets(1).Cells(i, 7)))
+Worksheets(1).Cells(j, 12).NumberFormat = "0.00%"
+If YearlyChange > 0 Then
+Worksheets(1).Cells(j, 11).Interior.Color = RGB(0, 255, 0)
+End If
+If YearlyChange < 0 Then
+Worksheets(1).Cells(j, 11).Interior.Color = RGB(255, 0, 0)
+End If
+Next i
+j = j + 1
+TotalVolume = 0
+TotalVolume = TotalVolume + Worksheets(1).Cells(i, 7).Value
+Worksheets(1).Cells(j, 13).Value = Worksheets(1).Cells(Rows.Count, 9).End(xlUp).Row
+Dim MaxPercentIncrease As Double
+Dim MaxPercent
+
+
+End Sub
